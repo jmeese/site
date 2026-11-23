@@ -1,0 +1,85 @@
+/**
+ * CGT talk theme for reveal.js — the "standard talk blue".
+ * White ground, near-black ink, indigo #2626e6 accent.
+ * Fraunces display headings + Schibsted Grotesk body. Mirrors the CGT site.
+ *
+ * Drop into reveal.js/css/theme/ and run `npm run build:styles`
+ * (compiles to dist/theme/cgt-talk.css).
+ */
+
+// Load utils
+@use 'sass:color';
+@use 'template/mixins' as mixins;
+
+$cgt-indigo: #2626e6;
+
+// Inject theme variables (with overrides)
+@use 'template/settings' with (
+	$background-color: #ffffff,
+
+	$main-color: #14161c,
+	$main-font: "'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif",
+	$main-font-size: 38px,
+
+	$heading-color: #14161c,
+	$heading-font: "'Fraunces', Georgia, serif",
+	$heading-font-weight: 600,
+	$heading-line-height: 1.05,
+	$heading-letter-spacing: -0.01em,
+	$heading-text-transform: none,
+
+	$heading1-size: 2.7em,
+	$heading2-size: 1.6em,
+	$heading3-size: 1.25em,
+	$heading4-size: 1em,
+
+	$link-color: $cgt-indigo,
+	$link-color-hover: color.scale($cgt-indigo, $lightness: -15%),
+
+	$selection-color: #fff,
+	$selection-background-color: $cgt-indigo
+);
+
+// Inject the theme template
+@use 'template/theme';
+
+// Fonts (same as the CGT site). For an offline deck, self-host the woff2.
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap');
+
+/* --- CGT extras (not expressible through settings variables) --- */
+
+// Site signature: an .accent span inside a heading goes indigo.
+//   <h1>The <span class="accent">public</span></h1>
+.reveal h1 .accent, .reveal h2 .accent, .reveal h3 .accent { color: #2626e6; }
+
+// Site signature: uppercase mono kicker/label above a title.
+//   <p class="kicker">Centre for Communicative Governance</p>
+.reveal .kicker, .reveal .label {
+	font-family: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
+	font-weight: 700; font-size: 0.42em; letter-spacing: 0.06em;
+	text-transform: uppercase; color: #6b7280; margin-bottom: 0.4em;
+}
+
+// Blockquote — indigo left rule, soft wash.
+.reveal blockquote {
+	width: 80%; padding: 10px 24px; font-style: normal; color: #14161c;
+	background: #edeefc; box-shadow: none; border-left: 3px solid #2626e6;
+}
+
+// Inline code chip.
+.reveal :not(pre) > code {
+	color: #2626e6; background: #edeefc;
+	border-radius: 3px; padding: 0.05em 0.3em; font-size: 0.9em;
+}
+
+// Tables — uppercase mono heads over an ink rule, hairline rows.
+.reveal table th {
+	text-transform: uppercase; letter-spacing: .05em; font-size: 0.6em;
+	color: #6b7280; border-bottom: 1px solid #14161c;
+}
+.reveal table td { border-bottom: 1px solid #e6e8ec; }
+.reveal table tbody tr:last-child td { border-bottom: none; }
+
+// Chrome.
+.reveal .progress { color: #2626e6; }
+.reveal .slide-number { background: none; color: #6b7280; }

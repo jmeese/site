@@ -1,0 +1,154 @@
+/* =========================================================================
+   reveal.js theme — CGT talk (the "standard talk blue")
+   White ground, near-black ink, indigo #2626e6 accent.
+   Mirrors the CGT site (cgt/cgt-site/index.html): Schibsted Grotesk body,
+   Fraunces display serif, uppercase mono labels, hairline rules.
+
+   Standalone: load this AFTER dist/reveal.css. It defines the --r-* custom
+   properties reveal expects AND the rules that consume them, so you do NOT
+   also need a built-in base theme.
+
+       <link rel="stylesheet" href="dist/reveal.css">
+       <link rel="stylesheet" href="cgt-talk.css" id="theme">
+
+   Fonts load from Google Fonts (same as the CGT site) — needs a network
+   connection the first time. For an offline deck, self-host the woff2 and
+   swap the @import for @font-face rules.
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap');
+
+/* --- Palette + reveal variables ------------------------------------------ */
+:root {
+  --cgt-white:       #ffffff;
+  --cgt-ink:         #14161c;   /* near-black body + headings               */
+  --cgt-grey:        #6b7280;   /* captions, slide number                   */
+  --cgt-ghost:       #c9cfd8;   /* faint labels                             */
+  --cgt-hair:        #e6e8ec;   /* hairline rules                           */
+  --cgt-indigo:      #2626e6;   /* THE blue — links, accents, kickers       */
+  --cgt-indigo-soft: #edeefc;   /* soft indigo wash                         */
+
+  --cgt-sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --cgt-serif: "Fraunces", Georgia, serif;
+
+  /* reveal.js theme contract. */
+  --r-background-color: var(--cgt-white);
+  --r-main-font: var(--cgt-sans);
+  --r-main-font-size: 38px;
+  --r-main-color: var(--cgt-ink);
+  --r-block-margin: 20px;
+
+  --r-heading-margin: 0 0 20px 0;
+  --r-heading-font: var(--cgt-serif);   /* Fraunces display, like the site brand */
+  --r-heading-color: var(--cgt-ink);
+  --r-heading-line-height: 1.05;
+  --r-heading-letter-spacing: -0.01em;
+  --r-heading-text-transform: none;
+  --r-heading-text-shadow: none;
+  --r-heading-font-weight: 600;
+  --r-heading1-text-shadow: none;
+  --r-heading1-size: 2.7em;
+  --r-heading2-size: 1.6em;
+  --r-heading3-size: 1.25em;
+  --r-heading4-size: 1em;
+
+  --r-code-font: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --r-link-color: var(--cgt-indigo);
+  --r-link-color-hover: #1a1ab8;
+  --r-link-color-dark: #1a1ab8;
+
+  --r-selection-color: #fff;
+  --r-selection-background-color: var(--cgt-indigo);
+}
+
+/* --- Consuming rules ----------------------------------------------------- */
+.reveal-viewport { background: var(--r-background-color); background-color: var(--r-background-color); }
+
+.reveal {
+  font-family: var(--r-main-font);
+  font-size: var(--r-main-font-size);
+  font-weight: normal;
+  color: var(--r-main-color);
+}
+
+.reveal .slides section,
+.reveal .slides section > section { line-height: 1.4; font-weight: inherit; }
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  margin: var(--r-heading-margin);
+  color: var(--r-heading-color);
+  font-family: var(--r-heading-font);
+  font-weight: var(--r-heading-font-weight);
+  line-height: var(--r-heading-line-height);
+  letter-spacing: var(--r-heading-letter-spacing);
+  text-transform: var(--r-heading-text-transform);
+  text-shadow: var(--r-heading-text-shadow);
+  word-wrap: break-word;
+}
+.reveal h1 { font-size: var(--r-heading1-size); text-shadow: var(--r-heading1-text-shadow); }
+.reveal h2 { font-size: var(--r-heading2-size); }
+.reveal h3 { font-size: var(--r-heading3-size); }
+.reveal h4 { font-size: var(--r-heading4-size); }
+
+/* Site signature: an .accent span inside a heading goes indigo.
+   Write it as   <h1>Communicative <span class="accent">Governance</span></h1> */
+.reveal h1 .accent, .reveal h2 .accent, .reveal h3 .accent { color: var(--cgt-indigo); }
+
+/* Site signature: uppercase mono kicker/label above a title. */
+.reveal .kicker, .reveal .label {
+  font-family: var(--cgt-sans); font-weight: 700;
+  font-size: 0.42em; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--cgt-grey); margin-bottom: 0.4em;
+}
+
+.reveal p { margin: var(--r-block-margin) 0; line-height: 1.5; }
+
+.reveal a { color: var(--r-link-color); text-decoration: none; transition: color 0.15s ease; }
+.reveal a:hover { color: var(--r-link-color-hover); text-shadow: none; border: none; }
+
+.reveal ::selection { color: var(--r-selection-color); background: var(--r-selection-background-color); text-shadow: none; }
+.reveal ::-moz-selection { color: var(--r-selection-color); background: var(--r-selection-background-color); text-shadow: none; }
+
+.reveal strong, .reveal b { font-weight: 700; }
+.reveal em { font-style: italic; }
+
+/* Blockquote — indigo left rule, soft wash. */
+.reveal blockquote {
+  display: block; position: relative; width: 80%;
+  margin: var(--r-block-margin) auto; padding: 10px 24px;
+  font-style: normal; color: var(--cgt-ink);
+  background: var(--cgt-indigo-soft); box-shadow: none;
+  border-left: 3px solid var(--cgt-indigo);
+}
+
+.reveal code { font-family: var(--r-code-font); text-transform: none; tab-size: 2; }
+.reveal pre {
+  width: 90%; margin: var(--r-block-margin) auto; text-align: left;
+  font-size: 0.55em; font-family: var(--r-code-font); line-height: 1.2em;
+  word-wrap: break-word; background: #fafbfc; border: 1px solid var(--cgt-hair);
+  border-radius: 6px; box-shadow: none;
+}
+.reveal pre code { display: block; padding: 10px; overflow: auto; max-height: 400px; word-wrap: normal; }
+.reveal :not(pre) > code {
+  color: var(--cgt-indigo); background: var(--cgt-indigo-soft);
+  border-radius: 3px; padding: 0.05em 0.3em; font-size: 0.9em;
+}
+
+/* Tables — hairline rules, uppercase mono column heads, indigo accent heads. */
+.reveal table { margin: auto; border-collapse: collapse; border-spacing: 0; }
+.reveal table th {
+  font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  font-size: 0.6em; color: var(--cgt-grey);
+  border-bottom: 1px solid var(--cgt-ink);
+}
+.reveal table td {
+  text-align: left; padding: 0.4em 0.6em; border-bottom: 1px solid var(--cgt-hair);
+}
+.reveal table th { text-align: left; padding: 0.4em 0.6em; }
+.reveal table tbody tr:last-child td { border-bottom: none; }
+
+/* Chrome. */
+.reveal .controls { color: var(--cgt-indigo); }
+.reveal .progress { background: var(--cgt-hair); color: var(--cgt-indigo); }
+.reveal .slide-number { background: none; color: var(--cgt-grey); font-family: var(--cgt-sans); }

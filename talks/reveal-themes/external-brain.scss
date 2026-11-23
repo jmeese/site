@@ -1,0 +1,80 @@
+/**
+ * External Brain theme for reveal.js.
+ * Catppuccin Latte palette, lavender accent, all IBM Plex Mono.
+ * Mirrors the External Brain site (projects/home).
+ *
+ * Drop into reveal.js/css/theme/ and run `npm run build:styles`
+ * (compiles to dist/theme/external-brain.css).
+ */
+
+// Load utils
+@use 'sass:color';
+@use 'template/mixins' as mixins;
+
+$eb-lav: #5b6fd6;        // readable lavender (AA) — links
+$eb-lav-vivid: #7287fd;  // vivid lavender — accents
+
+// Inject theme variables (with overrides)
+@use 'template/settings' with (
+	$background-color: #f7f8fc,
+
+	$main-color: #4c4f69,
+	$main-font: "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace",
+	$main-font-size: 38px,
+
+	$heading-color: #4c4f69,
+	$heading-font: "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace",
+	$heading-font-weight: 600,
+	$heading-line-height: 1.25,
+	$heading-letter-spacing: -0.01em,
+	$heading-text-transform: none,   // EB is sentence case, never UPPER
+
+	$heading1-size: 2.4em,
+	$heading2-size: 1.5em,
+	$heading3-size: 1.2em,
+	$heading4-size: 1em,
+
+	$code-font: "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace",
+
+	$link-color: $eb-lav,
+	$link-color-hover: $eb-lav-vivid,
+
+	$selection-color: #fff,
+	$selection-background-color: $eb-lav-vivid
+);
+
+// Inject the theme template
+@use 'template/theme';
+
+// IBM Plex Mono (Google Fonts). For a guaranteed-offline deck, self-host the
+// woff2 instead — see external-brain.css, which @font-faces local files.
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+/* --- External Brain extras (not expressible through settings variables) --- */
+
+// Signature teal underscore after section headings.
+.reveal h2::after { content: "_"; color: currentColor; margin-left: 1px; }
+
+// Inline code chip (EB site style).
+.reveal :not(pre) > code {
+	color: #5b6fd6; background: #e6e9fb;
+	border-radius: 3px; padding: 0.05em 0.3em; font-size: 0.9em;
+}
+
+// Airy blockquote — hairline left rule, not reveal's default box/shadow.
+.reveal blockquote {
+	width: 80%; padding: 4px 20px; font-style: normal; color: #6c6f85;
+	background: none; box-shadow: none; border-left: 3px solid #7287fd;
+}
+
+// Tables — uppercase mono column heads, hairline rows.
+.reveal table th {
+	text-transform: uppercase; letter-spacing: .03em;
+	font-size: 0.72em; color: #6c6f85;
+}
+.reveal table th, .reveal table td { border-bottom: 1px solid #ccd0da; }
+.reveal table tbody tr:last-child td { border-bottom: none; }
+
+// Chrome.
+.reveal .progress { color: #7287fd; }
+.reveal .slide-number { background: none; color: #6c6f85; }

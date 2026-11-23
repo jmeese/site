@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>reveal.js theme preview — EB / CGT</title>
+
+<!-- reveal.js core (pinned) from CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<!-- our theme: default External Brain; swap with the button top-right -->
+<link rel="stylesheet" href="external-brain.css" id="theme">
+
+<style>
+  /* tiny theme switcher, not part of the themes themselves */
+  #theme-switch { position: fixed; top: 10px; right: 12px; z-index: 50;
+    font: 13px/1 ui-monospace, Menlo, monospace; display: flex; gap: 6px; }
+  #theme-switch button { cursor: pointer; border: 1px solid #999; background: #fff;
+    color: #222; padding: 6px 10px; border-radius: 5px; }
+  #theme-switch button.on { background: #222; color: #fff; }
+</style>
+</head>
+<body>
+
+<div id="theme-switch">
+  <button data-theme="external-brain.css" class="on">External Brain</button>
+  <button data-theme="cgt-talk.css">CGT talk</button>
+</div>
+
+<div class="reveal"><div class="slides">
+
+  <!-- Title -->
+  <section>
+    <p class="kicker">Centre for Communicative Governance</p>
+    <h1>The ventriloquised <span class="accent">public</span></h1>
+    <p>James Meese · reveal.js theme preview</p>
+    <p><a href="#">cgt.example.edu</a></p>
+  </section>
+
+  <!-- Headings + body -->
+  <section>
+    <h2>How a section reads</h2>
+    <p>Body text sits at a comfortable size with generous line height. Here is
+    an <a href="#">inline link</a>, some <strong>bold</strong>, and a touch of
+    <em>emphasis</em> to check the type colours.</p>
+    <h3>A subheading</h3>
+    <p>Subheadings step down in size but hold the family and colour.</p>
+  </section>
+
+  <!-- Lists -->
+  <section>
+    <h2>Lists</h2>
+    <ul>
+      <li>First point, stated plainly</li>
+      <li>Second point, with a <a href="#">reference</a>
+        <ul><li>a nested qualification</li></ul>
+      </li>
+      <li>Third point</li>
+    </ul>
+  </section>
+
+  <!-- Blockquote -->
+  <section>
+    <h2>A pulled quote</h2>
+    <blockquote>The accent rule and wash should read as the house colour, not as
+    a generic callout box.</blockquote>
+  </section>
+
+  <!-- Code -->
+  <section>
+    <h2>Code</h2>
+    <p>Inline <code>model &lt;- lmer(y ~ x + (1|group))</code> and a block:</p>
+    <pre><code>library(lme4)
+fit &lt;- lmer(score ~ condition + (1 | participant), data = d)
+summary(fit)</code></pre>
+  </section>
+
+  <!-- Table -->
+  <section>
+    <h2>A table</h2>
+    <table>
+      <thead><tr><th>Model</th><th>AIC</th><th>&Delta;</th></tr></thead>
+      <tbody>
+        <tr><td>Intercept only</td><td>1204.3</td><td>—</td></tr>
+        <tr><td>+ condition</td><td>1188.1</td><td>16.2</td></tr>
+        <tr><td>+ condition × time</td><td>1181.7</td><td>6.4</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({ hash: true, slideNumber: true });
+
+  // theme switcher — swaps the #theme stylesheet href
+  document.querySelectorAll('#theme-switch button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.getElementById('theme').setAttribute('href', b.dataset.theme);
+      document.querySelectorAll('#theme-switch button').forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+    });
+  });
+</script>
+</body>
+</html>
