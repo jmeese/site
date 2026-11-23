@@ -1,7 +1,6 @@
 # jmeese/site
 
-Personal academic site — plain static HTML, no Jekyll, no build framework.
-Served by GitHub Pages at <https://jmeese.github.io/site/>.
+Personal academic site.
 
 ## Files
 
