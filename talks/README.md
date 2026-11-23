@@ -6,20 +6,24 @@ HTML. The shared theme files live in `reveal-themes/`.
 ## Steps
 
 1. **Make a folder:** `talks/<slug>/` (e.g. `talks/civic-recommenders/`).
-2. **Author the deck** as `talks/<slug>/<slug>.html`. Skeleton below — it loads the
-   markdown, highlight, and notes plugins, so you can write slides in Markdown, get
-   syntax-highlighted code, and press **S** for speaker view with your notes.
+2. **Author the deck** as `talks/<slug>/index.html` — naming it `index.html` gives a
+   clean URL (`/talks/<slug>/`). The skeleton loads the markdown, highlight, and notes
+   plugins, so you can write slides in Markdown, get highlighted code, and press **S**
+   for speaker view with your notes.
 
-   ```html
+   (The outer block below is fenced with four backticks so the inner ```python example
+   displays correctly on GitHub.)
+
+   ````html
    <!doctype html>
    <html lang="en">
    <head>
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>My talk</title>
-     <!-- reveal.js core, pinned, from CDN -->
+     <!-- reveal.js: reset browser defaults, then core, then code-highlight colours -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
-     <!-- code-highlighting colours for the highlight plugin -->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
      <!-- your theme: External Brain (lavender) or CGT (indigo) -->
      <link rel="stylesheet" href="../reveal-themes/external-brain.css" id="theme">
@@ -27,7 +31,9 @@ HTML. The shared theme files live in `reveal-themes/`.
    <body>
      <div class="reveal"><div class="slides">
 
-       <!-- Write slides in Markdown. '---' = new slide, 'Note:' = speaker notes. -->
+       <!-- Write slides in Markdown. '---' = new slide, 'Note:' = speaker notes.
+            Keep every line indented the SAME amount (reveal strips the first line's
+            indentation from all lines; mismatched indentation parses wrongly). -->
        <section data-markdown>
          <textarea data-template>
            ## Title slide
@@ -61,32 +67,38 @@ HTML. The shared theme files live in `reveal-themes/`.
      </script>
    </body>
    </html>
-   ```
+   ````
 
    Swap `external-brain.css` for `cgt-talk.css` to use the CGT (indigo) theme.
    `reveal-themes/index.html` is a live preview of both themes.
 
-3. **Link it** from `../talks.html` — add one `<li>` inside the list.
+3. **Link it** from `../talks.html` — add one `<li>` inside the list, pointing at the
+   folder: `<a href="talks/<slug>/">Talk title</a> — Venue, Year`.
 
 ## Writing in Markdown
 
-- `data-markdown` + the `<textarea data-template>` lets you write the whole deck in
-  Markdown inline. `---` starts a new slide, `--` a vertical sub-slide, and a line
-  beginning `Note:` becomes speaker notes for that slide.
-- Prefer a separate `.md` file? Point at it instead and keep the HTML tiny:
+- The inline `<textarea data-template>` splits horizontal slides on `---` and reads a
+  `Note:` line as speaker notes. **Vertical sub-slides (`--`) are off by default** —
+  the inline block above does not enable them. To use them, either add
+  `data-separator-vertical="^\r?\n--\r?\n"` to the `<section data-markdown>` tag, or
+  use the external-file form below (recommended for real talks — it also sidesteps the
+  indentation gotcha entirely):
 
   ```html
   <section data-markdown="slides.md"
-           data-separator="^\n---\n"
-           data-separator-vertical="^\n--\n"
+           data-separator="^\r?\n---\r?\n"
+           data-separator-vertical="^\r?\n--\r?\n"
            data-separator-notes="^Note:"></section>
   ```
 
+  (The `\r?\n` in each pattern matches both Unix and Windows line endings.)
+
 ## Notes
 
-- **Speaker view:** press **S** in the deck — opens a second window with your notes,
-  next slide, and a timer. Needs the notes plugin (included above).
-- Theme fonts (IBM Plex Mono) are bundled in `reveal-themes/fonts/`, so decks render
-  the same offline and online.
-- Everything loads from the CDN at a single pinned version — no npm, nothing to build.
+- **Speaker view:** press **S** in the deck — a second window with your notes, the next
+  slide, and a timer. Needs the notes plugin (included above).
+- **Needs internet.** reveal.js and its plugins load from the CDN, so a deck will not
+  render offline — only the theme fonts are bundled locally. For a venue, either
+  self-host reveal (drop its `dist/` + `plugin/` files into the repo) or keep a **PDF
+  backup**.
 - **Export to PDF:** open the deck with `?print-pdf` appended, then Print → Save as PDF.
